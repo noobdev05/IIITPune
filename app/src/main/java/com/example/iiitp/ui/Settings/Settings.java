@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.iiitp.R;
+import com.example.iiitp.ui.scholarship.utilities.ScholarshipData;
 
 public class Settings extends Fragment {
 
     private SettingsViewModel mViewModel;
+
 
     public static Settings newInstance() {
         return new Settings();
@@ -34,5 +36,4 @@ public class Settings extends Fragment {
         mViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         // TODO: Use the ViewModel
     }
-
 }
