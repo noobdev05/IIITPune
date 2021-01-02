@@ -64,7 +64,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
-            viewHolder.getTextView().setText(position);
+            viewHolder.getTextView().setText(mdata[position].name);
         }
 
         // Return the size of your dataset (invoked by the layout manager)

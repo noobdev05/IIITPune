@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,9 +33,9 @@ public class Schedule extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.schedule_fragment, container, false);
         mdata = new Scheduledata[]{
-                new Scheduledata("FY Schedule"),
-                new Scheduledata("SY Schedule"),
-                new Scheduledata("TY Schedule"),
+                new Scheduledata("First Year Schedule"),
+                new Scheduledata("Second Year Schedule"),
+                new Scheduledata("Third Year Schedule"),
                 new Scheduledata("Final Year Schedule")
         };
         recyclerView = (RecyclerView)view.findViewById(R.id.schedule_recyclerview);
@@ -43,7 +44,10 @@ public class Schedule extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
        adapter = new ScheduleAdapter(mdata);
+
         recyclerView.setAdapter(adapter);
+        DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(view.getContext(),DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         return view;
     }
