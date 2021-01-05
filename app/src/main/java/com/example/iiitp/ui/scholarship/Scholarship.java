@@ -1,4 +1,4 @@
-package com.example.iiitp.ui.scholarship;
+ package com.example.iiitp.ui.scholarship;
 
 import androidx.lifecycle.ViewModelProvider;
 
