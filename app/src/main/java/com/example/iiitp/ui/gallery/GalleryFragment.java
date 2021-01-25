@@ -1,16 +1,20 @@
 package com.example.iiitp.ui.gallery;
 
+
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.webkit.MimeTypeMap;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +28,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iiitp.R;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -85,6 +90,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
         textViewShow.setOnClickListener(this);
 
         return root;
+
     }
 
     private void showFileChooser() {
