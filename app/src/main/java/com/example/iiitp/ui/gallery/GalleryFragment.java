@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iiitp.R;
 
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -42,11 +43,7 @@ import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 
-class Constants {
 
-    public static final String STORAGE_PATH_UPLOADS = "uploads/";
-    public static final String DATABASE_PATH_UPLOADS = "uploads";
-}
 
 public class GalleryFragment<root> extends Fragment implements View.OnClickListener {
 
@@ -83,7 +80,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
         textViewShow = root.findViewById(R.id.textViewShow);
 
         storageReference = FirebaseStorage.getInstance().getReference();
-        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+        mDatabase = FirebaseDatabase.getInstance().getReference(GalleryConstants.DATABASE_PATH_UPLOADS);
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
@@ -129,7 +126,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
             progressDialog.show();
 
 
-            StorageReference sRef = storageReference.child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
+            StorageReference sRef = storageReference.child(GalleryConstants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
 
 
             sRef.putFile(filePath)
@@ -143,7 +140,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
                             Toast.makeText(getContext().getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
 
 
-                            Upload upload = new Upload(editTextName.getText().toString().trim(), taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                            GalleryUpload upload = new GalleryUpload(editTextName.getText().toString().trim(), taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
 
 
                             String uploadId = mDatabase.push().getKey();
@@ -179,6 +176,8 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
         } else if (view == buttonUpload) {
             uploadFile();
         } else if (view == textViewShow) {
+            Intent intent = new Intent (this.getActivity(), ShowImagesActivity.class);
+            startActivity(intent);
 
         }
     }
