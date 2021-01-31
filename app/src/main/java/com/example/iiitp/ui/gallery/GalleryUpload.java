@@ -4,16 +4,15 @@ import android.net.Uri;
 
 import com.google.android.gms.tasks.Task;
 
-public class Upload {
+public class GalleryUpload {
     public String name;
     public String url;
 
-    // Default constructor required for calls to
-    // DataSnapshot.getValue(User.class)
-    public Upload(String trim, Task<Uri> downloadUrl) {
+
+    public GalleryUpload(String trim, Task<Uri> downloadUrl) {
     }
 
-    public Upload(String name, String url) {
+    public GalleryUpload(String name, String url) {
         this.name = name;
         this.url= url;
     }
