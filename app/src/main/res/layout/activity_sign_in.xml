@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8FB5CC"
+    android:background="#6081A6"
     tools:context=".SignInActivity">
 
     <Button
@@ -14,7 +14,7 @@
         android:shadowRadius="2"
         android:text="Sign In"
         android:textSize="24sp"
-        app:backgroundTint="#E43984"
+        app:backgroundTint="#1E3E63"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
