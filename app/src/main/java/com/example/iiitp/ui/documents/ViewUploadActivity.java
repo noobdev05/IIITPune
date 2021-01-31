@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.iiitp.R;
@@ -26,6 +27,7 @@ public class ViewUploadActivity extends AppCompatActivity {
     ListView mUploadlistView;
     DatabaseReference mDatabaseReference;
     List<Upload> uploadList;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class ViewUploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_upload);
 
         mUploadlistView = findViewById(R.id.upload_list_view);
+        progressBar = findViewById(R.id.progressBar_docu);
         uploadList = new ArrayList<>();
 
         mUploadlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,8 +65,9 @@ public class ViewUploadActivity extends AppCompatActivity {
                 }
 
                 //displaying it to list
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_item_list_view, uploads);
                 mUploadlistView.setAdapter(adapter);
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override

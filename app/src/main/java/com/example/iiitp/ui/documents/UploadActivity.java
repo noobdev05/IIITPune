@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.iiitp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -97,6 +98,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                 mFilepathTextView.setVisibility(View.VISIBLE);
                 mFilePath.setVisibility(View.VISIBLE);
                 mFilePath.setText(data.getData().toString());
+                mFileStatus.setVisibility(View.INVISIBLE);
 
             }else{
                 Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();
@@ -113,9 +115,20 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         progressBar.setVisibility(View.GONE);
+                        mFileStatus.setVisibility(View.VISIBLE);
+                        mUploadButton.setVisibility(View.INVISIBLE);
+                        mFileNameEditText.setVisibility(View.INVISIBLE);
+                        mFileNameTextView.setVisibility(View.INVISIBLE);
+                        mFilepathTextView.setVisibility(View.INVISIBLE);
+                        mFilePath.setVisibility(View.INVISIBLE);
+                        mFileStatus.setTextSize(24);
                         mFileStatus.setText("File Uploaded Successfully");
 
-                        Upload upload = new Upload(mFileNameEditText.getText().toString(),sRef.getDownloadUrl().toString());
+                        Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                        while(!uri.isComplete());
+                        Uri url = uri.getResult();
+
+                        Upload upload = new Upload(mFileNameEditText.getText().toString(),url.toString());
                         mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
                     }
                 })
