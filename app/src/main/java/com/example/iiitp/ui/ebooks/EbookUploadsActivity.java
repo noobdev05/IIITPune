@@ -38,7 +38,7 @@ class EbookUploadsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ebooks_uploads);
 
-        uploadList = new ArrayList<>();
+        uploadList = new ArrayList<EbookUpload>();
         listView = (ListView) findViewById(R.id.mylistView);
 
         viewAllFiles();
