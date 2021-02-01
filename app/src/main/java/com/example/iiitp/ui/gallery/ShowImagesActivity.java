@@ -28,7 +28,7 @@ public class ShowImagesActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
 
-    private List<GalleryUpload> uploads;
+    public List<GalleryUpload> uploads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

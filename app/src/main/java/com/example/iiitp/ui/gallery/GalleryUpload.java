@@ -9,7 +9,7 @@ public class GalleryUpload {
     public String url;
 
 
-    public GalleryUpload(String trim, Task<Uri> downloadUrl) {
+    public GalleryUpload() {
     }
 
     public GalleryUpload(String name, String url) {
