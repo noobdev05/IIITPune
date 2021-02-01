@@ -176,7 +176,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
         } else if (view == buttonUpload) {
             uploadFile();
         } else if (view == textViewShow) {
-            Intent intent = new Intent (this.getActivity(), ShowImagesActivity.class);
+            Intent intent = new Intent (this.getActivity(), com.example.iiitp.ui.gallery.ShowImagesActivity.class);
             startActivity(intent);
 
         }
