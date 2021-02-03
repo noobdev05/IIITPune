@@ -29,8 +29,10 @@ import android.widget.Toast;
 
 
 import com.example.iiitp.R;
+import com.example.iiitp.ui.documents.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,9 +47,7 @@ import static android.app.Activity.RESULT_OK;
 public class Ebooks extends Fragment implements View.OnClickListener {
 
 //    private EbooksViewModel mViewModel;
-final static int PICK_PDF_CODE = 2342;
-
-    //these are the views
+    final static int PICK_PDF_CODE = 2341;
     TextView textViewStatus;
     EditText editTextFilename;
     ProgressBar progressBar;
@@ -55,10 +55,6 @@ final static int PICK_PDF_CODE = 2342;
     //the firebase objects for storage and database
     StorageReference mStorageReference;
     DatabaseReference mDatabaseReference;
-
-    public static Ebooks newInstance() {
-        return new Ebooks();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -69,28 +65,18 @@ final static int PICK_PDF_CODE = 2342;
         mDatabaseReference = FirebaseDatabase.getInstance().getReference(EbookConstants.DATABASE_PATH_UPLOADS);
 
         //getting the views
-        textViewStatus = (TextView) root.findViewById(R.id.textViewStatus);
-        editTextFilename = (EditText) root.findViewById(R.id.editTextFileName);
-        progressBar = (ProgressBar) root.findViewById(R.id.progressbar);
+        textViewStatus = root.findViewById(R.id.textViewStatus);
+        editTextFilename = root.findViewById(R.id.editTextFileName);
+        progressBar = root.findViewById(R.id.progressbar);
 
         //attaching listeners to views
-       root. findViewById(R.id.buttonUploadFile).setOnClickListener(this);
-       root. findViewById(R.id.textViewUploads).setOnClickListener(this);
-        Button button = (Button) root.findViewById(R.id.textViewUploads);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EbookUploadsActivity.class);
-                intent.putExtra("some","some data");
-                startActivity(intent);
-            }
-        });
-
+       root.findViewById(R.id.buttonUploadFile).setOnClickListener(this);
+       root.findViewById(R.id.textViewUploads).setOnClickListener(this);
+        Button button = root.findViewById(R.id.textViewUploads);
+        button.setOnClickListener(this);
         return root;
     }
     private void getPDF() {
-        //for greater than lolipop versions we need the permissions asked on runtime
-        //so if the permission is not available user will go to the screen to allow storage permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this.getActivity(),
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -108,7 +94,6 @@ final static int PICK_PDF_CODE = 2342;
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //when the user choses the file
         if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             //if a file is selected
             if (data.getData() != null) {
@@ -130,7 +115,11 @@ final static int PICK_PDF_CODE = 2342;
                         progressBar.setVisibility(View.GONE);
                         textViewStatus.setText("File Uploaded Successfully");
 
-                        EbookUpload upload = new EbookUpload(editTextFilename.getText().toString(), taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                        Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                        while(!uri.isComplete());
+                        Uri url = uri.getResult();
+
+                        EbookUpload upload = new EbookUpload(editTextFilename.getText().toString(),url.toString());
                         mDatabaseReference.child(mDatabaseReference.push().getKey()).setValue(upload);
                     }
                 })
@@ -150,25 +139,20 @@ final static int PICK_PDF_CODE = 2342;
                 });
 
     }
-//    public void btn_action(View view){
-//        startActivity(new Intent(this.getActivity(),EbookUploadsActivity.class));
-//
-//    }
-    @SuppressLint("NonConstantResourceId")
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonUploadFile:
                 getPDF();
                 break;
-//            case R.id.textViewUploads:
-//                startActivity(new Intent(getActivity(), EbookUploadsActivity.class));
-//                break;
+            case R.id.textViewUploads:
+                Intent intent = new Intent(getActivity(),EbookUploadsActivity.class);
+                startActivity(intent);
         }
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        mViewModel = new ViewModelProvider(this).get(EbooksViewModel.class);
         // TODO: Use the ViewModel
     }
 

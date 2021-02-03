@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class EbookUploadsActivity extends AppCompatActivity{
-    //the listview
+
     ListView listView;
 
     //database reference to get uploads data
@@ -38,33 +38,9 @@ class EbookUploadsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ebooks_uploads);
 
-        uploadList = new ArrayList<EbookUpload>();
-        listView = (ListView) findViewById(R.id.mylistView);
+        uploadList = new ArrayList<>();
+        listView = findViewById(R.id.my_list_view);
 
-        viewAllFiles();
-      Bundle bundle= getIntent().getExtras();
-      if(bundle!= null){
-          if(bundle.getString("some")!=null){
-              Toast.makeText(getApplicationContext(), "data:"+bundle.getString("some"), Toast.LENGTH_SHORT).show();
-          }
-      }
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //getting the upload
-                EbookUpload upload = uploadList.get(i);
-
-                //Opening the upload file in browser using the upload url
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(upload.getUrl()));
-                startActivity(intent);
-            }
-        });
-
-
-    }
-
-    private void viewAllFiles() {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference(EbookConstants.DATABASE_PATH_UPLOADS);
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,52 +66,17 @@ class EbookUploadsActivity extends AppCompatActivity{
 
             }
         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //getting the upload
+                EbookUpload upload = uploadList.get(i);
+
+                //Opening the upload file in browser using the upload url
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(upload.getUrl()));
+                startActivity(intent);
+            }
+        });
     }
-
-    //adding a clicklistener on listview
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                //getting the upload
-//                EbookUpload upload = uploadList.get(i);
-//
-//                //Opening the upload file in browser using the upload url
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(upload.getUrl()));
-//                startActivity(intent);
-//            }
-//        });
-//
-//
-//        //getting the database reference
-//        mDatabaseReference = FirebaseDatabase.getInstance().getReference(EbookConstants.DATABASE_PATH_UPLOADS);
-//
-//        //retrieving upload data from firebase database
-//        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    EbookUpload upload = postSnapshot.getValue(EbookUpload.class);
-//                    uploadList.add(upload);
-//                }
-//
-//                String[] uploads = new String[uploadList.size()];
-//
-//                for (int i = 0; i < uploads.length; i++) {
-//                    uploads[i] = uploadList.get(i).getName();
-//                }
-//
-//                //displaying it to list
-//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
-//                listView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
-
 }
