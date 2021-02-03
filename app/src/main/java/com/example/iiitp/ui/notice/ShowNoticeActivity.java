@@ -1,4 +1,4 @@
-package com.example.iiitp.ui.gallery;
+package com.example.iiitp.ui.notice;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iiitp.R;
+import com.example.iiitp.ui.gallery.GalleryAdapter;
+import com.example.iiitp.ui.gallery.GalleryConstants;
+import com.example.iiitp.ui.gallery.GalleryUpload;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowImagesActivity extends AppCompatActivity {
+public class ShowNoticeActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
@@ -28,12 +31,12 @@ public class ShowImagesActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
 
-    public List<GalleryUpload> uploads;
+    public List<NoticeUpload> uploads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_images_activity);
+        setContentView(R.layout.show_notice_activity);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -43,12 +46,12 @@ public class ShowImagesActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-        uploads = new ArrayList<GalleryUpload>();
+        uploads = new ArrayList<NoticeUpload>();
 
 
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(GalleryConstants.DATABASE_PATH_UPLOADS);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(NoticeConstants.DATABASE_PATH_UPLOADS);
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -59,12 +62,12 @@ public class ShowImagesActivity extends AppCompatActivity {
 
 
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    GalleryUpload upload;
-                    upload = postSnapshot.getValue(GalleryUpload.class);
+                    NoticeUpload upload;
+                    upload = postSnapshot.getValue(NoticeUpload.class);
                     uploads.add(upload);
                 }
 
-                adapter = new GalleryAdapter(getApplicationContext(), uploads);
+                adapter = new NoticeAdapter(getApplicationContext(), uploads);
 
 
                 recyclerView.setAdapter(adapter);

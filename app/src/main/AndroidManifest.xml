@@ -36,6 +36,7 @@
             android:theme="@style/Theme.IIITP.NoActionBar" />
         <activity android:name=".ui.gallery.ShowImagesActivity" />
         <activity android:name=".ui.ebooks.EbookUploadsActivity"/>
+        <activity android:name="com.example.iiitp.ui.notice.ShowNoticeActivity"/>
     </application>
 
 </manifest>

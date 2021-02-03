@@ -31,6 +31,8 @@ import com.example.iiitp.R;
 
 
 import com.example.iiitp.ui.documents.Upload;
+import com.example.iiitp.ui.notice.NoticeConstants;
+import com.example.iiitp.ui.notice.NoticeUpload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -82,7 +84,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
         textViewShow = root.findViewById(R.id.textViewShow);
 
         storageReference = FirebaseStorage.getInstance().getReference();
-        mDatabase = FirebaseDatabase.getInstance().getReference(GalleryConstants.DATABASE_PATH_UPLOADS);
+        mDatabase = FirebaseDatabase.getInstance().getReference(NoticeConstants.DATABASE_PATH_UPLOADS);
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
@@ -128,7 +130,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
             progressDialog.show();
 
 
-            StorageReference sRef = storageReference.child(GalleryConstants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
+            StorageReference sRef = storageReference.child(NoticeConstants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
 
 
             sRef.putFile(filePath)
@@ -142,7 +144,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
                             Toast.makeText(getContext().getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
 
 
-//                            GalleryUpload upload = new GalleryUpload(editTextName.getText().toString().trim(), taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+//                            NoticeUpload upload = new NoticeUpload(editTextName.getText().toString().trim(), taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
 //
 //
 //                            String uploadId = mDatabase.push().getKey();
@@ -152,7 +154,7 @@ public class GalleryFragment<root> extends Fragment implements View.OnClickListe
                             while(!uri.isComplete());
                             Uri url = uri.getResult();
 
-                            GalleryUpload upload = new GalleryUpload(editTextName.getText().toString(),url.toString());
+                            NoticeUpload upload = new NoticeUpload(editTextName.getText().toString(),url.toString());
                             mDatabase.child(mDatabase.push().getKey()).setValue(upload);
                         }
                     })
