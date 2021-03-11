@@ -32,10 +32,18 @@
             android:id="@+id/nav_scholarship"
             android:icon="@drawable/ic_menu_scholarship"
             android:title="@string/menu_scholarship" />
+
         <item
             android:id="@+id/nav_placement"
             android:icon="@drawable/ic_placement_icon"
             android:title="Placement"/>
+
+
+        <item
+            android:id="@+id/faculty"
+            android:icon="@drawable/ic_menu_faculty"
+            android:title="@string/faculty" />
+
     </group>
     <group android:id="@+id/grp2">
             <item
