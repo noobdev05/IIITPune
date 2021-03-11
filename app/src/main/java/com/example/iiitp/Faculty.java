@@ -79,4 +79,9 @@ public class Faculty extends Fragment implements FacultyListAdapter.MyClickListe
 
         return view;
     }
+
+    @Override
+    public void myOnClick(int position) {
+
+    }
 }
