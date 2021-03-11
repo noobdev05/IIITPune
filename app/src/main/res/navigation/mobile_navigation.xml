@@ -56,7 +56,8 @@
 
         android:id="@+id/nav_placement"
         android:name="com.example.iiitp.ui.placement.PlacementFragment"
-        android:label="Placement"
+        android:label="Placement"/>
+    <fragment
         android:id="@+id/faculty"
         android:name="com.example.iiitp.Faculty"
         android:label="fragment_faculty"
