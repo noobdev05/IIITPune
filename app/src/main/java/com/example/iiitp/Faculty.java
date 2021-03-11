@@ -74,7 +74,7 @@ public class Faculty extends Fragment implements FacultyListAdapter.MyClickListe
         recyclerView = view.findViewById(R.id.scholarship_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new ScholarshipAdapter(mdata,this);
+        adapter = new FacultyListAdapter(mdata,this);
         recyclerView.setAdapter(adapter);
 
         return view;
