@@ -37,8 +37,6 @@
             android:id="@+id/nav_placement"
             android:icon="@drawable/ic_placement_icon"
             android:title="Placement"/>
-
-
         <item
             android:id="@+id/nav_faculty"
             android:icon="@drawable/ic_menu_faculty"
