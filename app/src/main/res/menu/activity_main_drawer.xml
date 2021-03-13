@@ -40,7 +40,7 @@
 
 
         <item
-            android:id="@+id/faculty"
+            android:id="@+id/nav_faculty"
             android:icon="@drawable/ic_menu_faculty"
             android:title="@string/faculty" />
 
