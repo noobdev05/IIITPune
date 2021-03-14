@@ -35,7 +35,7 @@
             android:padding="8dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -46,7 +46,7 @@
             android:padding="8dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -57,7 +57,7 @@
             android:padding="8dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -68,7 +68,7 @@
             android:padding="8dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -79,7 +79,7 @@
             android:padding="8dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
