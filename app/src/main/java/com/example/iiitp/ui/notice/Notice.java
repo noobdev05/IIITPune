@@ -25,8 +25,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.iiitp.R;
-import com.example.iiitp.ui.gallery.GalleryConstants;
-import com.example.iiitp.ui.gallery.GalleryUpload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
