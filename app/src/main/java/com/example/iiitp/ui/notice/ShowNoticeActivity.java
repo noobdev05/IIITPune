@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iiitp.R;
-import com.example.iiitp.ui.gallery.GalleryAdapter;
-import com.example.iiitp.ui.gallery.GalleryConstants;
-import com.example.iiitp.ui.gallery.GalleryUpload;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
